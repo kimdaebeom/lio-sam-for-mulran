@@ -1,0 +1,16 @@
+<launch>
+
+    <arg name="project" default="lio_sam"/>
+    <arg name="interval" default="3.0f" />
+    <arg name="goal_update" default="0.5f" />
+    
+    <node pkg="$(arg project)" type="$(arg project)_imuPreintegration"   name="$(arg project)_imuPreintegration"    output="screen" 	respawn="true"/>
+    <node pkg="$(arg project)" type="$(arg project)_imageProjection"     name="$(arg project)_imageProjection"      output="screen"     respawn="true"/>
+    <node pkg="$(arg project)" type="$(arg project)_featureExtraction"   name="$(arg project)_featureExtraction"    output="screen"     respawn="true"/>
+    <node pkg="$(arg project)" type="$(arg project)_mapOptmization"      name="$(arg project)_mapOptmization"       output="screen"     respawn="true"/>
+    <node pkg="$(arg project)" type="$(arg project)_keyframepub"      name="$(arg project)_keyframepub"       output="screen"     respawn="true">
+	<param name="interval" value="$(arg interval)" />
+	<param name="goal_update" value="$(arg goal_update)" />
+    </node>
+    
+</launch>
